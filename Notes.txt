@@ -1,0 +1,48 @@
+# Django Girls - Django Tutorial Notes
+
+# Create a directory where we will store our project
+mkdir blogs
+
+# Creating a virtual environment
+python3.12 -m venv myvenv
+
+# Upgrading pip
+python3 -m pip install --upgrade pip
+
+# Create a requirements.txt file
+Django~=5.0.1
+
+# Installing Django through our requirements.txt file
+pip install -r requirements.txt
+
+# Creating a Django project in the same directory
+django-admin startproject mysite .
+
+# Setting time zone in settings.py
+TIME_ZONE = 'Asia/Manila'
+
+# Setting the STATIC_ROOT
+STATIC_ROOT = BASE_DIR / 'static'
+
+# Setting ALLOWED_HOSTS
+ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+
+# Creating a database for our project
+python3 manage.py migrate
+
+# Starting our web server
+python3 manage.py runserver
+python3 manage.py runserver 8001 # run at a specific port
+
+# Creating an app
+python3 manage.py startapp blog # remember to add to INSTALLED_APPS in settings.py
+
+# Creating tables for our models in our database and adding them to our database
+python3 manage.py makemigrations blog
+python3 manage.py migrate
+
+# Making admin have control over our Post models
+admin.site.register(Post)  # inside admin.py file
+
+# Creating a superuser
+python3 manage.py createsuperuser
