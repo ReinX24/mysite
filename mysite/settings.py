@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ["127.0.0.1", "reinx24.pythonanywhere.com"]
 INSTALLED_APPS = [
     # My apps
     "blog",
+    "whitenoise.runserver_nostatic",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -44,6 +45,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    # WhiteNoise for static files
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -125,7 +128,8 @@ STATIC_URL = "/static/"
 #     BASE_DIR / "static",
 #     "/var/www/static/",
 # ]
-STATIC_ROOT = BASE_DIR / "blog" / "static"
+STATIC_HOST = os.environ.get("DJANGO_STATIC_HOST", "")
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
