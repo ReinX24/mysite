@@ -46,3 +46,37 @@ admin.site.register(Post)  # inside admin.py file
 
 # Creating a superuser
 python3 manage.py createsuperuser
+
+# Looking at our Post objects using the python shell
+source myvenv/bin/activate
+python3 manage.py shell
+from blog.models import Post
+Post.objects.all()
+
+# Looking at our existing users in our database
+from django.contrib.auth.models import User
+User.objects.all()
+
+# Creating a Post object in our shell console
+me=User.objects.get(username='rein')
+Post.objects.create(author=me, title='Sample title', text='Test')
+
+# Filtering Post objects
+Post.objects.filter(author=me)
+Post.objects.filter(title__contains='title')  # returns Post objects with a title of 'title'
+
+from django.utils import timezone
+Post.objects.filter(published_date__lte=timezone.now())  # returns Post objects with a published date
+
+# Publishing a Post object through the python shell
+post = Post.objects.get(title='Sample title')
+post.publish()
+Post.objects.filter(published_date__lte=timezone.now())  # check if the Post objects with published_date increased
+
+# Ordering objects
+Post.objects.order_by('created_date')  # first created to lastest created
+Post.objects.order_by('-created_date')  # last created to first created
+
+# Getting Post objects that have been published and order them by their publish_date
+Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+exit()  # exit shell
