@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-#6mma#9)jz6qf%yz3pvxv6ngu_#f=a^8gyjik%ou3&z0xlm3g)"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1", "reinx24.pythonanywhere.com"]
 
@@ -34,6 +34,8 @@ ALLOWED_HOSTS = ["127.0.0.1", "reinx24.pythonanywhere.com"]
 INSTALLED_APPS = [
     # My apps
     "blog",
+    # Third party apps
+    "django_bootstrap5",
     "whitenoise.runserver_nostatic",
     "django.contrib.admin",
     "django.contrib.auth",
