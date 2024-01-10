@@ -2,8 +2,8 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-<h2>Edit post</h2>
-<form action="{% url 'blog:post_edit' post_id=post.id %}" method="POST" class="post-form">
+<h2>New post</h2>
+<form action="{% url 'blog:post_new' %}" method="POST" class="post-form">
     {% csrf_token %}
     {{ form.as_p }}
     {% bootstrap_button button_type="submit" button_class="btn-secondary" content="Save" %}

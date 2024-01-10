@@ -2,18 +2,30 @@
 
 {% block content %}
 <article class="post">
+
     <aside class="actions">
-        <a class="btn btn-secondary ms-2" href="{% url 'blog:post_edit' post_id=post.id %}">
+        {% if user.is_authenticated %}
+        {% if post.published_date %}
+        <time class="date">
+            Published On: {{ post.published_date }}
+        </time>
+        {% else %}
+        <a class="btn btn-secondary" href="{% url 'blog:post_publish' post_id=post.id %}">
+            Publish</a>
+        {% endif %}
+        <a class="btn btn-secondary" href="{% url 'blog:post_edit' post_id=post.id %}">
             <i class="bi bi-pencil-fill"></i>
         </a>
+        <a class="btn btn-secondary" href="{% url 'blog:post_remove' post_id=post.id %}">
+            <i class="bi bi-trash"></i>
+        </a>
+        {% endif %}
     </aside>
 
-    {% if post.published_date %}
-    <time class="date">
-        {{ post.published_date }}
-    </time>
-    {% endif %}
+
     <h2>{{ post.title }}</h2>
     <p>{{ post.text|linebreaksbr }}</p>
+
+
 </article>
 {% endblock content %}

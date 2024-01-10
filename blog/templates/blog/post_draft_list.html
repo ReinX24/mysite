@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+{% for post in draft_posts %}
+<div class="post">
+    <time class="date">Created On: {{ post.created_date|date:'d-m-Y' }}</time>
+    <h1><a href="{% url 'blog:post_detail' post_id=post.id %}">
+            {{ post.title }}</a></h1>
+    <p>{{ post.text|truncatechars:200 }}</p>
+</div>
+{% empty %}
+<p>No draft posts have been added yet.</p>
+{% endfor %}
+{% endblock content %}

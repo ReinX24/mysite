@@ -24,16 +24,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-#6mma#9)jz6qf%yz3pvxv6ngu_#f=a^8gyjik%ou3&z0xlm3g)"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["127.0.0.1", "reinx24.pythonanywhere.com"]
 
+# My settings
+LOGIN_REDIRECT_URL = "blog:post_list"
+LOGOUT_REDIRECT_URL = "blog:post_list"
 
 # Application definition
 
 INSTALLED_APPS = [
     # My apps
     "blog",
+    "accounts",
     # Third party apps
     "django_bootstrap5",
     "whitenoise.runserver_nostatic",
