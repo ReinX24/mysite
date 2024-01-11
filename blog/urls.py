@@ -18,5 +18,13 @@ urlpatterns = [
         views.add_comment_to_post,
         name="add_comment_to_post",
     ),
+    path(
+        "comment/<int:comment_id>/approve/",
+        views.comment_approve,
+        name="comment_approve",
+    ),
+    path(
+        "comment/<int:comment_id>/remove/", views.comment_remove, name="comment_remove"
+    ),
 ]
 # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

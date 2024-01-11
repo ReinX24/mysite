@@ -18,6 +18,10 @@ class Post(models.Model):
         self.published_date = timezone.now()
         self.save()
 
+    def approved_comments(self):
+        """Return approved_comments."""
+        return self.comment_set.filter(approved_comment=True)
+
     def __str__(self):
         """String representation of our Post model."""
         return self.title

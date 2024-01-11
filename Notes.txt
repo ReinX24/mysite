@@ -80,3 +80,21 @@ Post.objects.order_by('-created_date')  # last created to first created
 # Getting Post objects that have been published and order them by their publish_date
 Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
 exit()  # exit shell
+
+# Installing PostgreSQL
+sudo apt-get install postgresql postgresql-contrib
+
+# Creating the database
+sudo -u postgres psql
+
+# Creating a user
+CREATE USER name (name being interchangeable to our name)
+
+CREATE USER rein;
+CREATE DATABASE mysite OWNER rein;
+
+# Installing psycopg2 so that our PostgreSQL Database could connect with Python
+source myvenv/bin/activate
+sudo apt-get install libpq-dev python3-dev
+pip install psycopg2
+python3 -c "import psychopg2"

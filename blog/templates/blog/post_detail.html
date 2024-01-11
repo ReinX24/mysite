@@ -36,9 +36,9 @@
 <div class="comment">
     <div class="date">{{ comment.created_date }}
         {% if not comment.approved_comment %}
-        <a class="btn btn-secondary" href="">
+        <a class="btn btn-secondary" href="{% url 'blog:comment_remove' comment_id=comment.id %}">
             <i class="bi bi-hand-thumbs-down"></i></a>
-        <a class="btn btn-secondary" href="">
+        <a class="btn btn-secondary" href="{% url 'blog:comment_approve' comment_id=comment.id %}">
             <i class="bi bi-hand-thumbs-up"></i></a>
         {% endif %}
     </div>

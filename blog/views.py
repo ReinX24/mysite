@@ -2,7 +2,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from blog.forms import CommentForm, PostForm
-from blog.models import Post
+from blog.models import Post, Comment
 from django.contrib.auth.decorators import login_required
 
 
@@ -106,3 +106,19 @@ def add_comment_to_post(request, post_id):
     return render(
         request, "blog/add_comment_to_post.html", {"form": form, "post": post}
     )
+
+
+@login_required
+def comment_approve(request, comment_id):
+    """Approve a comment so that other people could see it."""
+    comment = get_object_or_404(Comment, id=comment_id)
+    comment.approve()
+    return redirect("blog:post_detail", post_id=comment.post.id)
+
+
+@login_required
+def comment_remove(request, comment_id):
+    """Approve a comment so that other people could see it."""
+    comment = get_object_or_404(Comment, id=comment_id)
+    comment.delete()
+    return redirect("blog:post_detail", post_id=comment.post.id)
