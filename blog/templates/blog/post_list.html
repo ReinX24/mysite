@@ -4,10 +4,12 @@
 
 {% for post in posts %}
 <article class="post">
-    <time>Published: {{ post.published_date }}</time>
+    <time class="date">Published: {{ post.published_date }}</time>
     <h2><a href="{% url 'blog:post_detail' post_id=post.id %}">{{ post.title }}
         </a></h2>
     <p>{{ post.text|linebreaksbr }}</p>
+    <a href="{% url 'blog:post_detail' post_id=post.id %}" class="btn btn-secondary">
+        Comments: {{ post.comment_set.count }}</a>
 </article>
 {% empty %}
 <p>No posts has been added yet.</p>

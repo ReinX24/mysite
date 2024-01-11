@@ -1,7 +1,7 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
-from blog.forms import PostForm
+from blog.forms import CommentForm, PostForm
 from blog.models import Post
 from django.contrib.auth.decorators import login_required
 
@@ -20,7 +20,10 @@ def post_list(request):
 def post_detail(request, post_id):
     """Return a page with post details."""
     post = get_object_or_404(Post, id=post_id)
-    return render(request, "blog/post_detail.html", {"post": post})
+    comments = post.comment_set.order_by("created_date")
+    return render(
+        request, "blog/post_detail.html", {"post": post, "comments": comments}
+    )
 
 
 @login_required
@@ -84,3 +87,22 @@ def post_remove(request, post_id):
         post = get_object_or_404(Post, id=post_id)
         post.delete()
         return redirect("blog:post_list")
+
+
+@login_required
+def add_comment_to_post(request, post_id):
+    """Add comment to a post."""
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == "POST":
+        form = CommentForm(data=request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect("blog:post_detail", post_id=post_id)
+    else:
+        form = CommentForm()
+
+    return render(
+        request, "blog/add_comment_to_post.html", {"form": form, "post": post}
+    )

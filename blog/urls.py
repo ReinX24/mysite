@@ -13,5 +13,10 @@ urlpatterns = [
     path("drafts/", views.post_draft_list, name="post_draft_list"),
     path("post/<int:post_id>/publish/", views.post_publish, name="post_publish"),
     path("post/<int:post_id>/remove/", views.post_remove, name="post_remove"),
+    path(
+        "post/<int:post_id>/comment/",
+        views.add_comment_to_post,
+        name="add_comment_to_post",
+    ),
 ]
 # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
