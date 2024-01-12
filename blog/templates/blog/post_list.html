@@ -8,8 +8,10 @@
     <h2><a href="{% url 'blog:post_detail' post_id=post.id %}">{{ post.title }}
         </a></h2>
     <p>{{ post.text|linebreaksbr }}</p>
+    <!-- <a href="{% url 'blog:post_detail' post_id=post.id %}" class="btn btn-secondary">
+        Comments: {{ post.approved_comments.count }}</a> -->
     <a href="{% url 'blog:post_detail' post_id=post.id %}" class="btn btn-secondary">
-        Comments: {{ post.approved_comments.count }}</a>
+        Comments</a>
 </article>
 {% empty %}
 <p>No posts has been added yet.</p>
