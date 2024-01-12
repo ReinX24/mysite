@@ -87,14 +87,14 @@ WSGI_APPLICATION = "mysite.wsgi.application"
 
 DATABASES = {
     "default": {
-        # "ENGINE": "django.db.backends.sqlite3",
-        # "NAME": BASE_DIR / "db.sqlite3",
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "mysite",
-        "USER": "rein",
-        # "PASSWORD": "",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+        # "ENGINE": "django.db.backends.postgresql",
+        # "NAME": "mysite",
+        # "USER": "rein",
+        # "PASSWORD": "minecraft64",
         # "HOST": "localhost",
-        # "PORT": "",
+        # "PORT": "5432",
     }
 }
 
